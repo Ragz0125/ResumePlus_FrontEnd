@@ -1,3 +1,4 @@
+"use client"
 import { Divider, Grid, Skeleton } from "@mui/material";
 import styles from "../Message/Message.module.scss";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
