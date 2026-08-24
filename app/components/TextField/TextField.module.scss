@@ -1,0 +1,89 @@
+@use "../../variables" as *;
+
+.chatInput {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  max-height: 200px;
+  padding: 8px 20px;
+  background: #ffffff;
+  border: 1px solid #ececec;
+  border-radius: 28px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: 400;
+
+  z-index: 1;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+
+  position: sticky; /* or fixed */
+  bottom: 0;
+
+  textarea {
+    flex: 1;
+    border: none;
+    outline: none;
+    resize: none;
+    overflow-y: auto;
+    background: transparent;
+    font-family: inherit;
+    line-height: 1.5;
+    color: #333;
+    width: 40rem;
+    min-height: 24px;
+    max-height: 200px;
+    padding: 0;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      margin-top: 5px;
+      background: #f1f1f1;
+      margin-bottom: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+  }
+}
+
+.sendButton {
+  width: 30px;
+  height: 30px;
+  border-radius: 100;
+  background-color: $primary_color;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  svg {
+    color: $white_color;
+    transition: color 0.2s ease;
+    font-size: 17;
+  }
+
+  &:hover {
+    background-color: $white_color;
+    border: 1px solid $primary_color;
+  }
+
+  &:hover svg {
+    color: $primary_color;
+  }
+}

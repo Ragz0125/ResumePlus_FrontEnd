@@ -1,0 +1,79 @@
+@use "../../variables" as *;
+
+.messageContainer {
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  position: relative;
+
+  .messageHeader {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .userBadge {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.08),
+      0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 0 24px rgba(255, 255, 255, 0.06);
+  }
+
+  .senderDetails {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .senderName {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .details {
+      font-size: 12px;
+      color: darkgray;
+    }
+  }
+
+  .messageContent {
+    font-size: 14px;
+    width: calc(90% - 20px);
+    box-sizing: border-box;
+
+    min-width: 0;
+    max-width: calc(90% - 20px);
+
+    margin-left: 20px;
+    border-radius: 4px;
+    padding: 10px 10px 10px 32px;
+    margin-top: -20px;
+    margin-left: 20px;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
+
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.08),
+      0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 0 24px rgba(255, 255, 255, 0.06);
+  }
+}
+
+.footer{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}

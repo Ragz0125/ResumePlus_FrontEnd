@@ -1,0 +1,122 @@
+@use "../../variables" as *;
+.layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
+  margin: 0 20px 0 40px;
+  overflow-y: hidden;
+  flex-direction: column;
+  gap: 20px;
+
+  .textDefault {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+}
+
+.populatedChat {
+  width: 90%;
+  height: 100%;
+  min-width: 0;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  width:100%;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.chatBox {
+  height: 95%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+
+  white-space: pre-wrap;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #9e9e9e;
+    background-clip: content-box;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+}
+
+  .featureBox{
+    width: 200px;
+    height: 200px;
+    border-radius: 6px;
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.08),
+      0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 0 24px rgba(255, 255, 255, 0.06);
+    background-color: $white_color;
+    border: 1px solid $primary_faded;
+
+    padding: 15px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.2s ease-in-out;
+
+    .title{
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .description{
+      font-size: 12px;
+      color: darkgray;
+      text-align: left;
+    }
+
+    .row{
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 10px;
+    }
+
+    &:hover{
+      transform: scale(1.05);
+      background-color: $primary_faded;
+    }
+  }
+
+  .featureContainer{
+    display:flex;
+    gap: 15px;
+  }
+
+  .skeletonLoader{
+  width: 100%;
+  margin-top: 5px;
+  margin-left: 20px;
+}

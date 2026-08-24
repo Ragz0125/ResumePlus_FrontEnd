@@ -1,0 +1,127 @@
+@use "../../variables" as *;
+
+.modalBackdrop {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .modalContainer {
+    width: 400px;
+    height: 500px;
+    border-radius: 8px;
+    background-color: $white_color;
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-direction: column;
+
+    position: relative;
+  }
+
+  .title {
+    font-size: 28px;
+    font-weight: 600;
+
+    display: flex;
+  }
+
+  .colored {
+    color: $primary_color;
+  }
+
+  .text {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .grayText {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: 400;
+    color: $dark_grey;
+  }
+
+  .inputContainer {
+    width: 100%;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    .inputBox {
+      width: 100%;
+
+      .label {
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      input {
+        border: 1px solid $grey;
+        width: 100%;
+        height: 40px;
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 12px;
+      }
+    }
+
+    .button {
+      width: 100%;
+      height: 40px;
+      color: $white_color;
+      background-color: $primary_color;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      border-radius: 8px;
+
+      cursor: pointer;
+
+      transition:
+        color 0.5ss,
+        background-color 0.5s,
+        border 0.5s;
+
+      &:hover {
+        color: $primary_color;
+        background-color: $white_color;
+        border: 1px solid $primary_color;
+      }
+    }
+  }
+}
+
+.cta {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+
+  font-size: small;
+
+  .hyperlink {
+    color: $primary_color;
+    cursor: pointer;
+  }
+}
+
+.closeButton {
+  z-index: 4;
+  position: absolute;
+  right: 20;
+  top: 20;
+  cursor: pointer;
+}
