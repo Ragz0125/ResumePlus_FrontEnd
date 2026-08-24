@@ -7,7 +7,6 @@ import { ChatScreenDefaultMessage } from "@/app/constants";
 import { Grid, Skeleton, Typography } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import customStyles from "../../pages/home/HomeScreen.module.scss";
-import data from "../../../mock_data.json";
 import { useRouter } from "next/compat/router";
 import { useParams } from "next/navigation";
 import { getConversationHistory, getLlmResponse } from "@/app/api/apiCalls";
