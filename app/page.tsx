@@ -12,7 +12,6 @@ export default function Home() {
 
   return (
     <>
-    {state?.loginModal && !state?.isLoggedIn && <LoginModal/>}
     {state?.openModal && !state?.isLoggedIn && <LandingModal/>}
     <HomeScreen/>
     </>

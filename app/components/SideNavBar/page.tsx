@@ -11,6 +11,7 @@ import { getAllConversations, getUserDetails } from "@/app/api/apiCalls";
 import LogoutIcon from "@mui/icons-material/Logout";
 import CustomModal from "../CustomModal";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import LoginModal from "../Login&SignUp/loginModal";
 
 const SideNavBar = () => {
   const router = useRouter();
@@ -96,6 +97,7 @@ const SideNavBar = () => {
 
   return (
     <>
+      {state?.loginModal && !state?.isLoggedIn && <LoginModal />}
       <CustomModal
         open={openModal}
         message={"Are you sure you want to Logout?"}
@@ -136,7 +138,10 @@ const SideNavBar = () => {
           </Grid>
         ) : (
           <Grid className={styles.signupContainer}>
-            <Grid className={styles.box} onClick={() => setState({...state, loginModal: true})}>
+            <Grid
+              className={styles.box}
+              onClick={() => setState({ ...state, loginModal: true })}
+            >
               <Grid className={styles.row}>
                 <PersonOutlineOutlinedIcon
                   sx={{ color: "#5661F6" }}
@@ -145,7 +150,7 @@ const SideNavBar = () => {
                 Login/Sign up
               </Grid>
               <Grid className={styles.text}>
-                <Grid/>
+                <Grid />
                 Save your chats and access them anywhere
               </Grid>
             </Grid>
