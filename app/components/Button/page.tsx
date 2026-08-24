@@ -49,10 +49,10 @@ export const HILButtons = ({ type, onClick, title }: ButtonProps) => {
     <Grid>
       <div
         className={styles.hilButtonLayout}
-        style={buttonStyles[type]}
+        style={buttonStyles[type ?? 'default']}
         onClick={onClick}
       >
-        {buttonIcons[type]} 
+        {buttonIcons[type ?? 'default']} 
         {title}
       </div>
     </Grid>
