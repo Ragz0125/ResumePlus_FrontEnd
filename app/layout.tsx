@@ -17,10 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "ResuMe+ | AI-Powered Resume Assistant",
   description:
-    "Explore my experience, skills, projects, and professional background through an AI-powered resume assistant.",
-  icons: {
-    icon: "/logo.png",
-  },
+    "Explore my experience, skills, projects, and professional background through an AI-powered resume assistant."
 };
 
 export default function RootLayout({
