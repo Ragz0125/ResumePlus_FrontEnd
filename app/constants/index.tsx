@@ -14,3 +14,7 @@ export const features = [
         description: "Draft and send professional emails to the candidate directly from the chat, making recruiter outreach quick and seamless",
     }
 ]
+
+export const LoginFailedMessage = "Please fill all the details"
+export const LoginSuccessMessage = "Logged in Successfully"
+export const SignUpSuccessMessage = "Signed in Successfully"

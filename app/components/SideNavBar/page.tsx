@@ -12,6 +12,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import CustomModal from "../CustomModal";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import LoginModal from "../Login&SignUp/loginModal";
+import SnackBar from "../Snackbar";
 
 const SideNavBar = () => {
   const router = useRouter();
@@ -98,6 +99,7 @@ const SideNavBar = () => {
   return (
     <>
       {state?.loginModal && !state?.isLoggedIn && <LoginModal />}
+      {/* {state?.openSnackBar && <SnackBar message={state?.snackBarMessage}/>} */}
       <CustomModal
         open={openModal}
         message={"Are you sure you want to Logout?"}
@@ -122,13 +124,15 @@ const SideNavBar = () => {
           sectionTitle={"Your Conversation"}
           linkTitle={"Clear All"}
         />
-        {conversationHistory.map((data: any) => (
-          <ChatTab
-            title={data?.title}
-            clicked={data?.clicked}
-            onClick={() => handleChatClick(data?.conversationId)}
-          />
-        ))}
+        <Grid className={styles.scroller}>
+          {conversationHistory.map((data: any) => (
+            <ChatTab
+              title={data?.title}
+              clicked={data?.clicked}
+              onClick={() => handleChatClick(data?.conversationId)}
+            />
+          ))}
+        </Grid>
         {state?.isLoggedIn ? (
           <Grid
             className={styles.logoutButton}

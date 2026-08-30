@@ -1,9 +1,10 @@
-import { Divider, Grid } from "@mui/material";
+import { Divider, Grid, snackbarClasses } from "@mui/material";
 import styles from "../Login&SignUp/LoginSignUp.module.scss";
 import { useContext, useState } from "react";
 import { login, signUp } from "@/app/api/apiCalls";
 import { AppContext } from "@/app/store/store";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import { LoginFailedMessage, LoginSuccessMessage, SignUpSuccessMessage } from "@/app/constants";
 
 const LoginModal = () => {
   const [formData, setFormData] = useState<any>({});
@@ -11,6 +12,19 @@ const LoginModal = () => {
   const [showLoginForm, setShowLoginForm] = useState<boolean>(true);
 
   const handleSignIn = () => {
+    if (
+      !(
+        formData?.username &&
+        formData?.password
+      )
+    ) {
+      setState({
+        ...state,
+        openSnackBar: true,
+        snackBarMessage: LoginFailedMessage,
+      });
+      return
+    }
     let payload = {
       username: formData?.username,
       password: formData?.password,
@@ -20,7 +34,7 @@ const LoginModal = () => {
       .then((response: any) => {
         if (response?.status == 200) {
           localStorage.setItem("token", response?.data?.access_token);
-          setState({ ...state, loginModal: false, isLoggedIn: true });
+          setState({ ...state, loginModal: false, isLoggedIn: true, snackBarMessage: LoginSuccessMessage, openSnackBar: true });
         }
       })
       .catch((err) => {
@@ -29,6 +43,22 @@ const LoginModal = () => {
   };
 
   const handleSignUp = () => {
+    if (
+      !(
+        formData?.name &&
+        formData?.email &&
+        formData?.username &&
+        formData?.password
+      )
+    ) {
+      setState({
+        ...state,
+        openSnackBar: true,
+        snackBarMessage: LoginFailedMessage,
+      });
+      return
+    }
+
     let payload = {
       name: formData?.name,
       email: formData?.email,
@@ -39,7 +69,7 @@ const LoginModal = () => {
     signUp(payload)
       .then((response: any) => {
         if (response?.status == 200) {
-          setState({ ...state, loginModal: false});
+          setState({ ...state, loginModal: false,snackBarMessage: SignUpSuccessMessage, openSnackBar: true });
         }
       })
       .catch((err) => {
