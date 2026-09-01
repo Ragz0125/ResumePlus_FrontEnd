@@ -146,7 +146,10 @@ const ChatHistory = () => {
           conversationId={conversationId}
         />
       )}
-      <Grid className={customStyles.layout} sx={{ display: { xs: 'none', md: 'block' }}}>
+      <Grid
+        className={customStyles.layout}
+        sx={{ display: { xs: "none", md: "flex", lg: "flex" } }}
+      >
         <ChatScreen>
           <Grid className={customStyles.populatedChat}>
             <Grid className={customStyles.chatBox}>

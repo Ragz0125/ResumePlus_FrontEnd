@@ -112,7 +112,7 @@ const Chat = () => {
       )}
       <Grid
         className={customStyles.layout}
-        sx={{ display: { xs: "none", md: "block" } }}
+        sx={{ display: { xs: "none", md:"flex", lg: "flex"} }}
       >
         <ChatScreen>
           {inputMessage?.length < 1 ? (
