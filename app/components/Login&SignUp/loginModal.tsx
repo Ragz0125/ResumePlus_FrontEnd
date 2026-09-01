@@ -42,6 +42,7 @@ const LoginModal = () => {
         }
       })
       .catch((err) => {
+        setState({ ...state, showLoader: false })
         console.log(err)
       })
     
@@ -81,6 +82,7 @@ const LoginModal = () => {
       })
       .catch((err) => {
         console.log(err);
+        setState({ ...state, showLoader: false })
       })
   };
 
