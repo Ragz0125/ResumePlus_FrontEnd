@@ -110,14 +110,17 @@ const Chat = () => {
           setOpenModal={setOpenModal}
         />
       )}
-      <Grid className={customStyles.layout}>
+      <Grid
+        className={customStyles.layout}
+        sx={{ display: { xs: "none", md: "block" } }}
+      >
         <ChatScreen>
           {inputMessage?.length < 1 ? (
             <>
               <Typography className={customStyles.textDefault}>
                 {ChatScreenDefaultMessage}
               </Typography>
-              <Grid size={{md: 7}}>
+              <Grid size={{ md: 7 }}>
                 <CustomTextField setInputMessage={setInputMessage} />
               </Grid>
             </>

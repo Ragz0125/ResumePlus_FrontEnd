@@ -85,7 +85,7 @@ const SideNavBar = () => {
           : { ...item, clicked: false },
       ),
     );
-    getConversationHistory()
+    getConversationHistory();
   };
 
   const handleNewChat = () => {
@@ -126,7 +126,27 @@ const SideNavBar = () => {
         handleSubmit={handleLogout}
         btnTitle={"Logout"}
       />
-      <div className={styles.sideBarLayout}>
+      <Grid
+        sx={{
+          display: {
+            xs: "flex",
+            md: "none",
+            lg: "none",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "#5661F6",
+            textAlign: "center",
+            fontWeight: "bold",
+          },
+        }}
+      >
+        This application is best experienced on a desktop. Please switch to a
+        desktop view to continue
+      </Grid>
+      <Grid
+        className={styles.sideBarLayout}
+        sx={{ display: { xs: "none", md: "block" } }}
+      >
         <div className={styles.topSection}>
           <div className={styles.logoSection} onClick={() => router.push("/")}>
             ResuMe +
@@ -184,7 +204,7 @@ const SideNavBar = () => {
             </Grid>
           </Grid>
         )}
-      </div>
+      </Grid>
     </>
   );
 };

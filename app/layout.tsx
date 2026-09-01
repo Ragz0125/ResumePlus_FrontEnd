@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SideNavBar from "./components/SideNavBar/page";
 import AppStore from "./store/store";
+import { Grid } from "@mui/material";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,7 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "ResuMe+ | AI-Powered Resume Assistant",
   description:
-    "Explore my experience, skills, projects, and professional background through an AI-powered resume assistant."
+    "Explore my experience, skills, projects, and professional background through an AI-powered resume assistant.",
 };
 
 export default function RootLayout({
@@ -37,10 +38,10 @@ export default function RootLayout({
           width: "100%",
         }}
       >
-        <AppStore>
-          <SideNavBar />
-          <main style={{ flex: 1 }}>{children}</main>
-        </AppStore>
+          <AppStore>
+            <SideNavBar />
+            <main style={{ flex: 1 }}>{children}</main>
+          </AppStore>
       </body>
     </html>
   );
