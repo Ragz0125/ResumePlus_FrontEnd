@@ -17,7 +17,7 @@ const HomeScreen = () => {
     "Email Candidate": <EmailOutlinedIcon sx={{ color: "#5661F6" }} />,
   };
   return (
-    <Grid className={styles.layout} sx={{ display: { xs: "none", md: "block" } }}>
+    <Grid className={styles.layout}>
       <Typography variant="h4" className={styles.textDefault}>
         Because Great Hiring Starts with Great Questions.
       </Typography>
