@@ -11,12 +11,14 @@ import Message from "../components/Message/page";
 import { getLlmResponse, sendHilResposne } from "../api/apiCalls";
 import EmailModal from "../components/Email/emailModal";
 import { AppContext } from "../store/store";
+import CustomModal from "../components/CustomModal";
 
 const Chat = () => {
   const { state, setState }: any = useContext(AppContext);
   const [inputMessage, setInputMessage] = useState<any>([]);
   const [conversationId, setConversationId] = useState(null);
   const [openEmailModal, setOpenEmailModal] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   useEffect(() => {
     if (inputMessage[inputMessage.length - 1]?.user === "You") {
@@ -27,7 +29,10 @@ const Chat = () => {
       };
       getLlmResponse(data).then((response: any) => {
         if (!conversationId) {
-          setState({...state, conversationId: response?.data?.conversation_id})
+          setState({
+            ...state,
+            conversationId: response?.data?.conversation_id,
+          });
           setConversationId(response?.data?.conversation_id);
         }
         setInputMessage((prev: any) => [
@@ -47,6 +52,10 @@ const Chat = () => {
   const loader = inputMessage[inputMessage.length - 1]?.user !== "ai";
 
   const handleSendEmail = (sendEmail: any) => {
+    if (!state?.isLoggeIn) {
+      setOpenModal(true);
+      return;
+    }
     const payload = sendEmail
       ? {
           conversation_id: state?.conversationId ?? conversationId,
@@ -85,11 +94,20 @@ const Chat = () => {
 
   return (
     <>
+      <CustomModal
+        open={openModal}
+        message={"Please log in to send/reject/edit e-mails"}
+        handleSubmit={() => {
+          setOpenModal(false);
+        }}
+        btnTitle={"Close"}
+      />
       {openEmailModal && (
         <EmailModal
           setOpenEmailModal={setOpenEmailModal}
           emailOutput={inputMessage[inputMessage.length - 1]?.emailOutput}
           setInputMessage={setInputMessage}
+          setOpenModal={setOpenModal}
         />
       )}
       <Grid className={customStyles.layout}>
@@ -99,7 +117,9 @@ const Chat = () => {
               <Typography className={customStyles.textDefault}>
                 {ChatScreenDefaultMessage}
               </Typography>
-              <CustomTextField setInputMessage={setInputMessage} />
+              <Grid size={{md: 7}}>
+                <CustomTextField setInputMessage={setInputMessage} />
+              </Grid>
             </>
           ) : (
             <Grid className={customStyles.populatedChat}>

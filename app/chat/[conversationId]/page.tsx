@@ -9,9 +9,14 @@ import { useContext, useEffect, useState } from "react";
 import customStyles from "../../pages/home/HomeScreen.module.scss";
 import { useRouter } from "next/compat/router";
 import { useParams } from "next/navigation";
-import { getConversationHistory, getLlmResponse } from "@/app/api/apiCalls";
+import {
+  getConversationHistory,
+  getLlmResponse,
+  sendHilResposne,
+} from "@/app/api/apiCalls";
 import { AppContext } from "@/app/store/store";
 import EmailModal from "@/app/components/Email/emailModal";
+import CustomModal from "@/app/components/CustomModal";
 
 const ChatHistory = () => {
   const params: any = useParams();
@@ -19,8 +24,9 @@ const ChatHistory = () => {
   const { state, setState }: any = useContext(AppContext);
   const [inputMessage, setInputMessage] = useState<any[]>([]);
   const [openEmailModal, setOpenEmailModal] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
-  console.log(conversationId)
+  console.log(conversationId);
 
   const getConversationHistoryById = () => {
     if (conversationId) {
@@ -81,8 +87,57 @@ const ChatHistory = () => {
 
   const loader = inputMessage[inputMessage.length - 1]?.role !== "ai";
 
+  const handleSendEmail = (sendEmail: any) => {
+    if (!state?.isLoggeIn) {
+      setOpenModal(true);
+      return;
+    }
+    const payload = sendEmail
+      ? {
+          conversation_id: state?.conversationId ?? conversationId,
+          is_approve: true,
+          email_input: {
+            body: inputMessage[inputMessage.length - 1]?.emailOutput?.body,
+            subject:
+              inputMessage[inputMessage.length - 1]?.emailOutput?.subject,
+          },
+        }
+      : {
+          conversation_id: "string",
+          is_approve: false,
+        };
+
+    setOpenEmailModal(false);
+    sendHilResposne(payload).then((response: any) => {
+      if (response.status == 200) {
+        setInputMessage((prev: any) => [
+          ...prev,
+          {
+            user: "you",
+            content: sendEmail ? "Yes, please send" : "Do not send the email",
+          },
+        ]);
+        setInputMessage((prev: any) => [
+          ...prev,
+          {
+            user: "ai",
+            content: response?.data?.data,
+          },
+        ]);
+      }
+    });
+  };
+
   return (
     <>
+      <CustomModal
+        open={openModal}
+        message={"Please log in to send/reject/edit e-mails"}
+        handleSubmit={() => {
+          setOpenModal(false);
+        }}
+        btnTitle={"Close"}
+      />
       {openEmailModal && (
         <EmailModal
           setOpenEmailModal={setOpenEmailModal}
@@ -91,7 +146,7 @@ const ChatHistory = () => {
           conversationId={conversationId}
         />
       )}
-      <Grid className={customStyles.layout}>
+      <Grid className={customStyles.layout} sx={{ display: { xs: 'none', md: 'block' }}}>
         <ChatScreen>
           <Grid className={customStyles.populatedChat}>
             <Grid className={customStyles.chatBox}>
@@ -103,6 +158,7 @@ const ChatHistory = () => {
                   hilRequired={message?.hilRequired}
                   emailOutput={message?.emailOutput}
                   setOpenEmailModal={setOpenEmailModal}
+                  handleSendEmail={handleSendEmail}
                 />
               ))}
               {loader && (

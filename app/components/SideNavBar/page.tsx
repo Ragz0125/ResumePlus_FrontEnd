@@ -13,12 +13,15 @@ import CustomModal from "../CustomModal";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import LoginModal from "../Login&SignUp/loginModal";
 import SnackBar from "../Snackbar";
+import CustomLoader from "../CustomLoader";
 
 const SideNavBar = () => {
   const router = useRouter();
   const { state, setState }: any = useContext(AppContext);
   const [conversationHistory, setConversationHistory] = useState<any>([]);
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openClearModal, setOpenClearModal] = useState<boolean>(false);
+  const [activeNewChat, setActiveNewChat] = useState<boolean>(false);
 
   const getConversationHistory = () => {
     getAllConversations()
@@ -82,9 +85,14 @@ const SideNavBar = () => {
           : { ...item, clicked: false },
       ),
     );
+    getConversationHistory()
   };
 
   const handleNewChat = () => {
+    if (activeNewChat) {
+      state?.isLoggedIn ? window.location.reload() : setOpenClearModal(true);
+    }
+    setActiveNewChat(true);
     router.push("/chat");
   };
 
@@ -98,12 +106,25 @@ const SideNavBar = () => {
 
   return (
     <>
+      {state?.showLoader && <CustomLoader />}
       {state?.loginModal && !state?.isLoggedIn && <LoginModal />}
-      {/* {state?.openSnackBar && <SnackBar message={state?.snackBarMessage}/>} */}
+      {state?.openSnackBar && <SnackBar message={state?.snackBarMessage} />}
+      <CustomModal
+        open={openClearModal}
+        message={
+          "Are you sure you want to leave the chat? This conversation will not be saved."
+        }
+        btnTitle={"Yes"}
+        handleSubmit={() => {
+          window.location.reload();
+          setOpenClearModal(false);
+        }}
+      />
       <CustomModal
         open={openModal}
         message={"Are you sure you want to Logout?"}
         handleSubmit={handleLogout}
+        btnTitle={"Logout"}
       />
       <div className={styles.sideBarLayout}>
         <div className={styles.topSection}>
@@ -129,7 +150,10 @@ const SideNavBar = () => {
             <ChatTab
               title={data?.title}
               clicked={data?.clicked}
-              onClick={() => handleChatClick(data?.conversationId)}
+              onClick={() => {
+                handleChatClick(data?.conversationId);
+                setActiveNewChat(false);
+              }}
             />
           ))}
         </Grid>

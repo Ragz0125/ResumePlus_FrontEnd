@@ -11,6 +11,7 @@ const EmailModal = ({
   emailOutput,
   setInputMessage,
   conversationId,
+  setOpenModal
 }: any) => {
   const [subject, setSubject] = useState(emailOutput?.subject);
   const [body, setBody] = useState(emailOutput?.body);
@@ -18,6 +19,10 @@ const EmailModal = ({
   console.log(state)
 
   const handleSendEmail = (sendEmail: any) => {
+    if(!state?.isLoggedIn){
+      setOpenModal(true)
+      return
+    }
     const payload = sendEmail
       ? {
           conversation_id: state?.conversationId ?? conversationId,

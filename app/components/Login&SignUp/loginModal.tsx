@@ -5,13 +5,16 @@ import { login, signUp } from "@/app/api/apiCalls";
 import { AppContext } from "@/app/store/store";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { LoginFailedMessage, LoginSuccessMessage, SignUpSuccessMessage } from "@/app/constants";
+import { useRouter } from "next/navigation";
 
 const LoginModal = () => {
   const [formData, setFormData] = useState<any>({});
   const { state, setState }: any = useContext(AppContext);
   const [showLoginForm, setShowLoginForm] = useState<boolean>(true);
+  const router = useRouter()
 
   const handleSignIn = () => {
+    setState({...state, showLoader: true})
     if (
       !(
         formData?.username &&
@@ -34,15 +37,18 @@ const LoginModal = () => {
       .then((response: any) => {
         if (response?.status == 200) {
           localStorage.setItem("token", response?.data?.access_token);
-          setState({ ...state, loginModal: false, isLoggedIn: true, snackBarMessage: LoginSuccessMessage, openSnackBar: true });
+          setState({ ...state, loginModal: false, isLoggedIn: true, snackBarMessage: LoginSuccessMessage, openSnackBar: true,showLoader: false});
+          router.push("/")
         }
       })
       .catch((err) => {
-        console.log(err);
-      });
+        console.log(err)
+      })
+    
   };
 
   const handleSignUp = () => {
+    setState({...state, showLoader: true})
     if (
       !(
         formData?.name &&
@@ -69,12 +75,13 @@ const LoginModal = () => {
     signUp(payload)
       .then((response: any) => {
         if (response?.status == 200) {
-          setState({ ...state, loginModal: false,snackBarMessage: SignUpSuccessMessage, openSnackBar: true });
+          setState({ ...state, loginModal: false,snackBarMessage: SignUpSuccessMessage, openSnackBar: true, showLoader: false });
+          router.push("/")
         }
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
   };
 
   const loginForm = () => {

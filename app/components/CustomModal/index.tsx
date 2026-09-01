@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import styles from "../CustomModal/CustomModal.module.scss";
 import { useState } from "react";
-const CustomModal = ({ open, message, handleSubmit }: any) => {
+const CustomModal = ({ open, message, handleSubmit, btnTitle }: any) => {
   return (
     <>
       {open && (
@@ -9,7 +9,7 @@ const CustomModal = ({ open, message, handleSubmit }: any) => {
           <Grid className={styles.modalContainer}>
             <Grid className={styles.message}>{message}</Grid>
             <Grid className={styles.button} onClick={() => handleSubmit()}>
-              Log out
+              {btnTitle}
             </Grid>
           </Grid>
         </Grid>
