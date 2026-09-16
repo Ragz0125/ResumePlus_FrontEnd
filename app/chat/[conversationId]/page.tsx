@@ -88,7 +88,7 @@ const ChatHistory = () => {
   const loader = inputMessage[inputMessage.length - 1]?.role !== "ai";
 
   const handleSendEmail = (sendEmail: any) => {
-    if (!state?.isLoggeIn) {
+    if (!state?.isLoggedIn) {
       setOpenModal(true);
       return;
     }
