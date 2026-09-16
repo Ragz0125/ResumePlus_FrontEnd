@@ -52,7 +52,7 @@ const Chat = () => {
   const loader = inputMessage[inputMessage.length - 1]?.user !== "ai";
 
   const handleSendEmail = (sendEmail: any) => {
-    if (!state?.isLoggeIn) {
+    if (!state?.isLoggedIn) {
       setOpenModal(true);
       return;
     }
