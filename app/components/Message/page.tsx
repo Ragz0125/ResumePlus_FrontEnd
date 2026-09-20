@@ -22,8 +22,6 @@ const Message = ({
   content,
   user,
   timestamp,
-  loader,
-  emailOutput,
   hilRequired,
   setOpenEmailModal,
   handleSendEmail

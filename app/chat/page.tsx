@@ -96,7 +96,7 @@ const Chat = () => {
     <>
       <CustomModal
         open={openModal}
-        message={"Please log in to send/reject/edit e-mails"}
+        message={"Please log in to send/reject e-mails"}
         handleSubmit={() => {
           setOpenModal(false);
         }}

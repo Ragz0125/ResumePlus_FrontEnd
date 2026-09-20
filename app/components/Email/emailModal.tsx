@@ -75,7 +75,7 @@ const EmailModal = ({
         </Grid>
         <Grid className={styles.row}>
           <Grid className={styles.title}>Reply-To:</Grid>
-          <Grid>scs.rajaraman@gmail.com</Grid>
+          <Grid>{state?.userDetails?.user_email || "NA"}</Grid>
         </Grid>
         <Grid className={styles.column}>
           <Grid className={styles.title}>Subject</Grid>
