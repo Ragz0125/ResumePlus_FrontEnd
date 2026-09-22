@@ -34,7 +34,7 @@ const EmailModal = ({
         }
       : {
           conversation_id: "string",
-          is_approve: false,
+          is_approve: fals,
         };
     
     setOpenEmailModal(false)

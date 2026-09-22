@@ -100,7 +100,7 @@ const Chat = () => {
         handleSubmit={() => {
           setOpenModal(false);
         }}
-        btnTitle={"Close"}
+        btnTitle={"Open"}
       />
       {openEmailModal && (
         <EmailModal
