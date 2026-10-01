@@ -37,6 +37,7 @@ const SideNavBar = () => {
             });
           }
           setConversationHistory(tempConHistory);
+          handleSideBarAnimation(state?.conversationId)
         }
       })
       .catch((error) => {
@@ -71,13 +72,7 @@ const SideNavBar = () => {
     );
   };
 
-  const handleChatClick = (id: any) => {
-    let clickedTab = conversationHistory.filter(
-      (data: any) => data?.conversationId === id,
-    );
-
-    router.push(`/chat/${clickedTab[0]?.conversationId}`);
-    setState({ ...state, conversationId: clickedTab[0]?.conversationId });
+  const handleSideBarAnimation = (id: any) => {
     setConversationHistory((prev: any) =>
       prev.map((item: any) =>
         item.conversationId === id
@@ -85,7 +80,24 @@ const SideNavBar = () => {
           : { ...item, clicked: false },
       ),
     );
-    getConversationHistory();
+  };
+
+  const handleChatClick = (id: any) => {
+    let clickedTab = conversationHistory.filter(
+      (data: any) => data?.conversationId === id,
+    );
+
+    setConversationHistory((prev: any) =>
+      prev.map((item: any) =>
+        item.conversationId === id
+          ? { ...item, clicked: true }
+          : { ...item, clicked: false },
+      ),
+    );
+
+    router.push(`/chat/${clickedTab[0]?.conversationId}`);
+    setState({ ...state, conversationId: clickedTab[0]?.conversationId });
+    getConversationHistory()
   };
 
   const handleNewChat = () => {
