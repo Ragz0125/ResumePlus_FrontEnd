@@ -34,6 +34,7 @@ const SideNavBar = () => {
             tempConHistory.push({
               conversationId: history[i]?.conversation_id,
               title: history[i]?.messages[0]?.content,
+              clicked: history[i]?.conversation_id === state?.conversationId
             });
           }
           setConversationHistory(tempConHistory);
