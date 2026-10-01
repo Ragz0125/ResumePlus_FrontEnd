@@ -37,7 +37,6 @@ const SideNavBar = () => {
             });
           }
           setConversationHistory(tempConHistory);
-          handleSideBarAnimation(state?.conversationId)
         }
       })
       .catch((error) => {
@@ -72,16 +71,6 @@ const SideNavBar = () => {
     );
   };
 
-  const handleSideBarAnimation = (id: any) => {
-    setConversationHistory((prev: any) =>
-      prev.map((item: any) =>
-        item.conversationId === id
-          ? { ...item, clicked: true }
-          : { ...item, clicked: false },
-      ),
-    );
-  };
-
   const handleChatClick = (id: any) => {
     let clickedTab = conversationHistory.filter(
       (data: any) => data?.conversationId === id,
@@ -97,7 +86,6 @@ const SideNavBar = () => {
 
     router.push(`/chat/${clickedTab[0]?.conversationId}`);
     setState({ ...state, conversationId: clickedTab[0]?.conversationId });
-    getConversationHistory()
   };
 
   const handleNewChat = () => {
